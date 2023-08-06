@@ -52,4 +52,9 @@ class User extends Authenticatable
         }
         return implode(', ', $roles);
     }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class);
+    }
 }

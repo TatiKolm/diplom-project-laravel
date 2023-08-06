@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
@@ -26,12 +27,19 @@ Route::get('/', [AppController::class, 'homePage'])->name("app.home");
 Route::get('catalog/categories/{categorySlug}', [AppController::class, "categoryProductsPage"])->name("app.catalog-by-category");
 Route::get('product/{productSlug}', [AppController::class, "productPage"])->name("app.product-page");
 
+Route::get('add-to-cart/{product}', [CartController::class, 'addToCart'])->name('cart.add-product');
+    Route::get('cart', [CartController::class, 'cartPage'])->name('cart');
+    Route::put('cart/items/{item}/edit', [CartController::class, 'changeQty'])->name('cart.item.qty-update');
+    Route::delete('cart/items/{item}', [CartController::class, 'destroy'])->name('cart.item.destroy');
 
 Route::middleware(['auth'])->group(function(){
 
-    Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.main');
+    
+    Route::prefix('admin-dashboard')->middleware('role:admin|moderator')->group(function () {
+        Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.main');
+    });
 
-    Route::prefix('categories')->group(function () {
+    Route::prefix('categories')->middleware('role:admin|moderator')->group(function () {
         Route::get('/', [CategoryController::class, 'categoriesList'])->name("categories.list");
         Route::get('create', [CategoryController::class, 'createCategory'])->name("categories.create");
         Route::post('create', [CategoryController::class, 'storeCategory'])->name("categories.store");
@@ -40,7 +48,7 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('{categoryId}', [CategoryController::class, 'deleteCategory'])->name("categories.delete");
     });
     
-    Route::prefix('products')->group(function () {
+    Route::prefix('products')->middleware('role:admin|moderator')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name("products.index");
         Route::get('create', [ProductController::class, 'create'])->name("products.create");
         Route::post('create', [ProductController::class, 'store'])->name("products.store");
@@ -49,13 +57,13 @@ Route::middleware(['auth'])->group(function(){
         Route::delete('{product}', [ProductController::class, 'destroy'])->name("products.destroy");
     });
     
-    Route::prefix('users')->group(function () {
+    Route::prefix('users')->middleware('role:admin')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name("users.index");
         Route::get('{user}/edit', [UserController::class, 'edit'])->name("users.edit");
         Route::put('{user}/edit', [UserController::class, 'update'])->name("users.update");
     });
 
-    Route::prefix('roles')->group(function () {
+    Route::prefix('roles')->middleware('role:admin')->group(function () {
         Route::get('/', [RoleController::class, 'index'])->name("roles.index");
         Route::get('create', [RoleController::class, 'create'])->name("roles.create");
         Route::post('create', [RoleController::class, 'store'])->name("roles.store");
@@ -63,7 +71,7 @@ Route::middleware(['auth'])->group(function(){
         Route::put('{role}/edit', [RoleController::class, 'update'])->name("roles.update");
     });
 
-    Route::prefix('permissions')->group(function () {
+    Route::prefix('permissions')->middleware('role:admin')->group(function () {
         Route::get('/', [PermissionController::class, 'index'])->name("permissions.index");
         Route::get('create', [PermissionController::class, 'create'])->name("permissions.create");
         Route::post('create', [PermissionController::class, 'store'])->name("permissions.store");

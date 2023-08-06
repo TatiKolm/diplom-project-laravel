@@ -20,7 +20,7 @@
 
                                 <ul class="products-action">
                                     <li>
-                                        <a href="cart.html" data-tooltip="tooltip" data-placement="top" title="в корзину"><i class="flaticon-shopping-cart"></i></a>
+                                        <a href="{{route('cart.add-product', $product)}}" data-tooltip="tooltip" data-placement="top" title="в корзину" class="add-to-cart"><i class="flaticon-shopping-cart "></i></a>
                                     </li>
                                     
                                     <li>
@@ -73,7 +73,7 @@
                                     <span class="new-price">{{$product->price}} руб.</span>
                                 </div>
                                 <p>{{$product->description}}</p>
-                                <div class="product-add-to-cart">
+                                <div class="product-add-to-cart d-flex">
                                     <div class="input-counter">
                                         <span class="minus-btn">
                                             <i class='bx bx-minus'></i>
@@ -83,9 +83,7 @@
                                             <i class='bx bx-plus'></i>
                                         </span>
                                     </div>
-                                    <button type="submit" class="default-btn">
-                                        В корзину
-                                    </button>
+                                    <a href="{{route('cart.add-product', $product)}}" type="button" class="default-btn add-to-cart">В корзину</a>
                                 </div>
                             </div>
                         </div>

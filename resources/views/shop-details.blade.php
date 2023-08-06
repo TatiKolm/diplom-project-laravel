@@ -20,7 +20,7 @@
                                     </div>
                                    <p>Состав</p>
                                     <p>{{ $product->description}}</p>
-                                    <div class="product-add-to-cart">
+                                    <div class="product-add-to-cart d-flex">
                                         <div class="input-counter">
                                             <span class="minus-btn">
                                                 <i class='bx bx-minus'></i>
@@ -30,10 +30,7 @@
                                                 <i class='bx bx-plus'></i>
                                             </span>
                                         </div>
-                                        <button type="submit" class="default-btn">
-                                            В корзину
-                                            <span></span>
-                                        </button>
+                                        <a href="{{route('cart.add-product', $product)}}" type="button" class="default-btn add-to-cart">В корзину</a>
                                     </div>
                                 </div>
                             </div>

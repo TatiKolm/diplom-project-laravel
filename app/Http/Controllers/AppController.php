@@ -28,7 +28,7 @@ class AppController extends Controller
 
     public function productPage($productSlug)
     {
-        $products = Product::all()->sortByDesc("created_at");
+        $products = Product::paginate(5)->sortByDesc("created_at");
         return view("shop-details", [
             'product' => Product::where("slug", $productSlug)->first(),
             'products' => $products,

@@ -162,7 +162,18 @@
                             </ul>
 
                             <div class="others-options d-flex align-items-center">
-                                
+                            @if($currentUser)
+                                @if($currentUser->cart)
+                                <div class="option-item">
+                                    <div class="cart-btn">
+                                        <a href="cart.html">
+                                            <i class='flaticon-shopping-cart'></i>
+                                            <span class="header-cart">{{ $currentUser->cart->getTotalItems() }}</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                @endif
+                                    @else
                                 <div class="option-item">
                                     <div class="cart-btn">
                                         <a href="cart.html">
@@ -171,6 +182,7 @@
                                         </a>
                                     </div>
                                 </div>
+                                @endif
 
                                 <div class="option-item">
                                     <form class="search-box">
@@ -212,15 +224,6 @@
                                             <option value="2">Ger</option>
                                             <option value="3">Span</option>
                                         </select>
-                                    </div>
-                                </div>
-
-                                <div class="option-item">
-                                    <div class="cart-btn">
-                                        <a href="cart.html">
-                                            <i class='flaticon-shopping-cart'></i>
-                                            <span>0</span>
-                                        </a>
                                     </div>
                                 </div>
 
