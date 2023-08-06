@@ -64,22 +64,31 @@
 
                     <div class="col-lg-6">
                         <ul class="top-header-social">
-                            <li>
-                                <a href="#" target="_blank">
-                                    Войти
-                                </a>
+                        @if (auth()->user())
+                            <li >
+                                {{ auth()->user()->name }}
                             </li>
                             <li>
-                                <a href="#" target="_blank">
-                                    Регистрация
-                                </a>
+                                <form action="{{ route('auth.logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-danger">Выйти</button>
+                                </form>
                             </li>
+                        @else
+                            <li>
+                                <a aria-current="page" href="{{ route('auth.login-page') }}">Войти</a>
+                            </li>
+                            <li>
+                                <a aria-current="page" href="{{ route('auth.register') }}">Регистрация</a>
+                            </li>
+                        @endif
+                        @hasanyrole('moderator|admin')
                             <li>
                                 <a href="{{ route('admin.main')}}" target="_blank">
                                     Администрирование сайта
                                 </a>
                             </li>
-
+                        @endhasanyrole
                         </ul>
                     </div>
                 </div>
@@ -93,7 +102,7 @@
                 <div class="container">
                     <div class="main-responsive-menu">
                         <div class="logo">
-                            <a href="index-4.html">
+                            <a href="{{ route('app.home')}}">
                                 GoodFood
                             </a>
                         </div>
@@ -106,14 +115,14 @@
                     <nav class="navbar navbar-expand-md navbar-light">
                     <div class="logo">
                                 <h2>
-                                    <a href="index.html">GoodFood</a>
+                                    <a href="{{ route('app.home')}}">GoodFood</a>
                                 </h2>
                             </div>
 
                         <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="{{ route('app.home')}}" class="nav-link active">
                                         Главная
                                     </a>
                                     
@@ -282,7 +291,7 @@
                         <div class="single-footer-widget">
                             <div class="logo">
                                 <h2>
-                                    <a href="index.html">Good Food</a>
+                                    <a href="{{ route('app.home')}}">Good Food</a>
                                 </h2>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -312,115 +321,41 @@
                     </div>
 
                     <div class="col-lg-3 col-sm-6">
-                        <div class="single-footer-widget">
-                            <h3>Instagram</h3>
-
-                            <ul class="instagram-list">
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram1.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram2.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram3.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram4.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram5.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram6.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram7.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram8.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="box">
-                                        <img src="assets/img/instagram/instagram1.jpg" alt="image">
-                                        <i class="bx bxl-instagram"></i>
-                                        <a href="#" target="_blank" class="link-btn"></a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-sm-6">
                         <div class="single-footer-widget pl-5">
-                            <h3>Quick Links</h3>
+                            <h3>Кейтеринг</h3>
     
                             <ul class="quick-links">
                                 <li>
-                                    <a href="#">About Us</a>
+                                    <a href="#">Выездной кейтеринг</a>
                                 </li>
                                 <li>
-                                    <a href="#">Our Services</a>
+                                    <a href="#">Фуршет</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="single-footer-widget pl-5">
+                            <h3>Ссылки</h3>
+    
+                            <ul class="quick-links">
+                                <li>
+                                    <a href="#">О нас</a>
                                 </li>
                                 <li>
-                                    <a href="#">Shop</a>
+                                    <a href="#">Меню</a>
                                 </li>
                                 <li>
-                                    <a href="#">Blog</a>
+                                    <a href="#">Контакты</a>
                                 </li>
-                                <li>
-                                    <a href="#">Faq</a>
-                                </li>
-                                <li>
-                                    <a href="#">Contact</a>
-                                </li>
+                                
                             </ul>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-sm-6">
                         <div class="single-footer-widget">
-                            <h3>Contact Us</h3>
+                            <h3>Свяжитесь с нами</h3>
 
                             <ul class="footer-contact-info">
                                 <li>
@@ -431,12 +366,12 @@
                                 <li>
                                     <i class='bx bx-envelope'></i>
                                     <span>Email</span>
-                                    <a href="mailto:hello@orgo.com">hello@orgo.com</a>
+                                    <a href="mailto:hello@orgo.com">hello@goodfood.com</a>
                                 </li>
                                 <li>
                                     <i class='bx bx-map'></i>
                                     <span>Address</span>
-                                    175 5th Ave Premium Area, New York, NY 10010, United States
+                                    Иваново
                                 </li>
                             </ul>
                         </div>
@@ -483,93 +418,6 @@
         </div>
         <!-- End Go Top Area -->
 
-        <!-- Start QuickView Modal Area -->
-        <div class="modal fade productsQuickView" id="productsQuickView" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="flaticon-cancel"></i></span>
-                    </button>
-
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="products-image"></div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-6">
-                            <div class="product-content">
-                                <h3>Seasoned Tomatoes</h3>
-                                <div class="price">
-                                    <span class="new-price">$541.00</span>
-                                    <span class="old-price">$652.00</span>
-                                </div>
-                                <div class="product-review">
-                                    <div class="rating">
-                                        <i class='bx bxs-star'></i>
-                                        <i class='bx bxs-star'></i>
-                                        <i class='bx bxs-star'></i>
-                                        <i class='bx bxs-star'></i>
-                                        <i class='bx bxs-star'></i>
-                                    </div>
-                                    <a href="#" class="rating-count">5 reviews</a>
-                                </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.</p>
-                                <div class="product-add-to-cart">
-                                    <div class="input-counter">
-                                        <span class="minus-btn">
-                                            <i class='bx bx-minus'></i>
-                                        </span>
-                                        <input type="text" value="1">
-                                        <span class="plus-btn">
-                                            <i class='bx bx-plus'></i>
-                                        </span>
-                                    </div>
-                                    <button type="submit" class="default-btn">
-                                        Add to cart
-                                    </button>
-                                </div>
-    
-                                <div class="buy-checkbox-btn">
-                                    <div class="item">
-                                        <input class="inp-cbx" id="cbx" type="checkbox">
-                                        <label class="cbx" for="cbx">
-                                            <span>
-                                                <svg width="12px" height="10px" viewbox="0 0 12 10">
-                                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                                </svg>
-                                            </span>
-                                            <span>I agree with the terms and conditions</span>
-                                        </label>
-                                    </div>
-                                    <div class="item">
-                                        <a href="#" class="btn btn-light">Buy it now!</a>
-                                    </div>
-                                </div>
-    
-                                <div class="products-share">
-                                    <ul class="social">
-                                        <li><span>Share:</span></li>
-                                        <li>
-                                            <a href="#" class="facebook" target="_blank"><i class='bx bxl-facebook'></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="twitter" target="_blank"><i class='bx bxl-twitter'></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="linkedin" target="_blank"><i class='bx bxl-linkedin'></i></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="instagram" target="_blank"><i class='bx bxl-instagram'></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End QuickView Modal Area -->
 
         <!-- Jquery Slim JS -->
         <script src="{{ asset('assets/js/jquery.min.js') }}"></script>

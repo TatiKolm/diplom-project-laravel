@@ -39,21 +39,21 @@
                         <div class="nav accordion" id="accordionSidenav">
                            
                             <!-- Sidenav Menu Heading (Core)-->
+                            @hasanyrole('moderator|admin')
                             <div class="sidenav-menu-heading">Контент</div>
                             <a class="nav-link" href="{{ route('categories.list')}}">Категории</a>
                             <a class="nav-link" href="{{ route('products.index')}}">Товары</a>
-                            
-                      
-                            <!-- Sidenav Heading (Addons)-->
-                            <div class="sidenav-menu-heading">Plugins</div>
-                            <!-- Sidenav Link (Charts)-->
-                            <a class="nav-link" href="charts.html">
-                                Charts
-                            </a>
-                            <!-- Sidenav Link (Tables)-->
-                            <a class="nav-link" href="tables.html">
-                                Tables
-                            </a>
+                            @endhasanyrole
+                            @hasrole('admin')
+                            <div class="sidenav-menu-heading">Управление пользователями</div>
+                            <a class="nav-link" href="{{ route('users.index')}}">Пользователи</a>
+                            <a class="nav-link" href="{{ route('roles.index')}}">Роли</a>
+                            <a class="nav-link" href="{{ route('permissions.index')}}">Права</a>
+                            @endhasrole
+                            @hasanyrole('moderator|admin')
+                            <div class="sidenav-menu-heading">Управление заказами</div>
+                            <a class="nav-link" href="">Заказы</a>
+                            @endhasanyrole
                         </div>
                     </div>
                     <!-- Sidenav Footer-->

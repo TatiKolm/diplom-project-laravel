@@ -16,7 +16,7 @@
                     <div class="col-lg-3 col-md-6">
                         <div class="top-products-item">
                             <div class="products-image">
-                                <a href="shop-details.html"><img src="{{$product->getImage()}}" alt="image"></a>
+                                <a href="{{ route('app.product-page', $product->slug)}}"><img src="{{$product->getImage()}}" alt="image"></a>
 
                                 <ul class="products-action">
                                     <li>
@@ -33,7 +33,7 @@
 
                             <div class="products-content">
                                 <h3>
-                                    <a href="shop-details.html">{{$product->title}}</a>
+                                    <a href="{{ route('app.product-page', $product->slug)}}">{{$product->title}}</a>
                                 </h3>
                                 <div class="price">
                                     <span class="new-price">{{$product->price}} руб.</span>
@@ -51,4 +51,47 @@
             </div>
         </section>
         <!-- End Top Products Area -->
+
+        
+        <!-- Start QuickView Modal Area -->
+        <div class="modal fade productsQuickView" id="productsQuickView" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="flaticon-cancel"></i></span>
+                    </button>
+
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div ><img src="{{$product->getImage()}}" alt="image"></div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6">
+                            <div class="product-content">
+                                <h3>{{$product->title}}</h3>
+                                <div class="price">
+                                    <span class="new-price">{{$product->price}} руб.</span>
+                                </div>
+                                <p>{{$product->description}}</p>
+                                <div class="product-add-to-cart">
+                                    <div class="input-counter">
+                                        <span class="minus-btn">
+                                            <i class='bx bx-minus'></i>
+                                        </span>
+                                        <input type="text" value="1">
+                                        <span class="plus-btn">
+                                            <i class='bx bx-plus'></i>
+                                        </span>
+                                    </div>
+                                    <button type="submit" class="default-btn">
+                                        В корзину
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End QuickView Modal Area -->
 @endsection

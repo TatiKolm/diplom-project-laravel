@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'category' => ['required'],
+            'category' => 'required',
         ]);
 
         $product=Product::add($request->all());

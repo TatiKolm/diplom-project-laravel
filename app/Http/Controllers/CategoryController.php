@@ -22,6 +22,10 @@ class CategoryController extends Controller
 
     public function storeCategory(Request $request)
     {
+        $request->validate([
+            'name' => 'required'
+        ]);
+        
         Category::create($request->all());
 
         return redirect()->route("categories.list");

@@ -2,8 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,24 +22,62 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [AppController::class, 'homePage'])->name("app.home");
-Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.main');
+
 Route::get('catalog/categories/{categorySlug}', [AppController::class, "categoryProductsPage"])->name("app.catalog-by-category");
+Route::get('product/{productSlug}', [AppController::class, "productPage"])->name("app.product-page");
 
-Route::prefix('categories')->group(function () {
-    Route::get('/', [CategoryController::class, 'categoriesList'])->name("categories.list");
-    Route::get('create', [CategoryController::class, 'createCategory'])->name("categories.create");
-    Route::post('create', [CategoryController::class, 'storeCategory'])->name("categories.store");
-    Route::get('{categoryId}/edit', [CategoryController::class, 'editCategory'])->name("categories.edit");
-    Route::put('{categoryId}/edit', [CategoryController::class, 'updateCategory'])->name("categories.update");
-    Route::delete('{categoryId}', [CategoryController::class, 'deleteCategory'])->name("categories.delete");
-});
 
-Route::prefix('products')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name("products.index");
-    Route::get('create', [ProductController::class, 'create'])->name("products.create");
-    Route::post('create', [ProductController::class, 'store'])->name("products.store");
-    Route::get('{product}/edit', [ProductController::class, 'edit'])->name("products.edit");
-    Route::put('{product}/edit', [ProductController::class, 'update'])->name("products.update");
-    Route::delete('{product}', [ProductController::class, 'destroy'])->name("products.destroy");
+Route::middleware(['auth'])->group(function(){
+
+    Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.main');
+
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [CategoryController::class, 'categoriesList'])->name("categories.list");
+        Route::get('create', [CategoryController::class, 'createCategory'])->name("categories.create");
+        Route::post('create', [CategoryController::class, 'storeCategory'])->name("categories.store");
+        Route::get('{categoryId}/edit', [CategoryController::class, 'editCategory'])->name("categories.edit");
+        Route::put('{categoryId}/edit', [CategoryController::class, 'updateCategory'])->name("categories.update");
+        Route::delete('{categoryId}', [CategoryController::class, 'deleteCategory'])->name("categories.delete");
+    });
     
+    Route::prefix('products')->group(function () {
+        Route::get('/', [ProductController::class, 'index'])->name("products.index");
+        Route::get('create', [ProductController::class, 'create'])->name("products.create");
+        Route::post('create', [ProductController::class, 'store'])->name("products.store");
+        Route::get('{product}/edit', [ProductController::class, 'edit'])->name("products.edit");
+        Route::put('{product}/edit', [ProductController::class, 'update'])->name("products.update");
+        Route::delete('{product}', [ProductController::class, 'destroy'])->name("products.destroy");
+    });
+    
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name("users.index");
+        Route::get('{user}/edit', [UserController::class, 'edit'])->name("users.edit");
+        Route::put('{user}/edit', [UserController::class, 'update'])->name("users.update");
+    });
+
+    Route::prefix('roles')->group(function () {
+        Route::get('/', [RoleController::class, 'index'])->name("roles.index");
+        Route::get('create', [RoleController::class, 'create'])->name("roles.create");
+        Route::post('create', [RoleController::class, 'store'])->name("roles.store");
+        Route::get('{role}/edit', [RoleController::class, 'edit'])->name("roles.edit");
+        Route::put('{role}/edit', [RoleController::class, 'update'])->name("roles.update");
+    });
+
+    Route::prefix('permissions')->group(function () {
+        Route::get('/', [PermissionController::class, 'index'])->name("permissions.index");
+        Route::get('create', [PermissionController::class, 'create'])->name("permissions.create");
+        Route::post('create', [PermissionController::class, 'store'])->name("permissions.store");
+    });
+
+    Route::post('logout', [AuthController::class, 'logout'])->name("auth.logout");
 });
+
+Route::middleware(['guest'])->group(function (){
+    Route::get('register', [AuthController::class, 'registerPage'])->name("auth.register");
+    Route::post('register', [AuthController::class, 'storeUser'])->name("auth.store-user");
+    Route::get('login', [AuthController::class, 'loginPage'])->name("auth.login-page");
+    Route::post('login', [AuthController::class, 'login'])->name("auth.login");
+}); 
+
+
+
