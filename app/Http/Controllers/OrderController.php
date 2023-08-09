@@ -18,7 +18,12 @@ class OrderController extends Controller
     {
         $request->validate([
             'user_name' => 'required',
-            'user_surname' => 'required'
+            'user_surname' => 'required',
+            'user_street' => 'required',
+            'user_house' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'pay' => 'required'
         ]);
 
         $cart = auth()->user()->cart;

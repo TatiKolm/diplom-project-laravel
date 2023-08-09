@@ -32,6 +32,7 @@ class Order extends Model
     {
         $order = new static;
         $order->fill($input);
+        $order->user_id = auth()->user()->id;
         $order->phone = $input['phone'] != null ? str_replace(['(', ')', '-', ' ', '+'], '', $input['phone']) : null;
         $order->save();
 
