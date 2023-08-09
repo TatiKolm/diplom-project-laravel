@@ -10,134 +10,54 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Product</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Unit Price</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Total</th>
+                                            <th scope="col">Товар</th>
+                                            <th scope="col">Наименование</th>
+                                            <th scope="col">Цена</th>
+                                            <th scope="col">Количество</th>
+                                            <th scope="col">Сумма</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($cart->items as $item)
                                         <tr>
                                             <td class="product-thumbnail">
                                                 <a href="#">
-                                                    <img src="assets/img/top-products/top-products-1.jpg" alt="item">
+                                                    <img src="{{$item->product->getImage()}}" alt="item">
                                                 </a>
                                             </td>
                                             <td class="product-name">
-                                                <a href="shop-details.html">Darling Oranges</a>
+                                                <a href="shop-details.html">{{$item->product->title}}</a>
                                             </td>
                                             <td class="product-price">
-                                                <span class="unit-amount">$455.00</span>
+                                                <span class="unit-amount">{{$item->price}} .руб</span>
                                             </td>
                                             <td class="product-quantity">
                                                 <div class="input-counter">
-                                                    <span class="minus-btn">
-                                                        <i class='bx bx-minus'></i>
-                                                    </span>
-                                                    <input type="text" value="1">
-                                                    <span class="plus-btn">
-                                                        <i class='bx bx-plus'></i>
-                                                    </span>
+                                                    <form action="{{ route('cart.item.qty-update', $item)}}" method="POST">
+                                                        @csrf @method("PUT")
+                                                        <span class="minus-btn">
+                                                            <i class='bx bx-minus'></i>
+                                                        </span>
+                                                        <input type="text" value="{{$item->quantity}}" class="change-qty" name="quantity">
+                                                        <span class="plus-btn">
+                                                            <i class='bx bx-plus'></i>
+                                                        </span>
+                                                    </form>
                                                 </div>
                                             </td>
                                             <td class="product-subtotal">
-                                                <span class="subtotal-amount">$455.00</span>
-                                                <a href="#" class="remove">
-                                                    <i class='bx bx-trash'></i>
-                                                </a>
+                                                <span class="subtotal-amount">{{$item->sub_total}} .руб</span>
+                                                
+                                                <td>
+                                                    <form action="{{ route('cart.item.destroy', $item)}}" method="POST">
+                                                        @csrf @method("DELETE")
+                                                        <button class="btn btn-danger btn-sm">Удалить</button>
+                                                    </form>
+                                                </td>
+                                                
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <a href="#">
-                                                    <img src="assets/img/top-products/top-products-2.jpg" alt="item">
-                                                </a>
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="shop-details.html">Strawberry</a>
-                                            </td>
-                                            <td class="product-price">
-                                                <span class="unit-amount">$541.50</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                <div class="input-counter">
-                                                    <span class="minus-btn">
-                                                        <i class='bx bx-minus'></i>
-                                                    </span>
-                                                    <input type="text" value="1">
-                                                    <span class="plus-btn">
-                                                        <i class='bx bx-plus'></i>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="subtotal-amount">$541.50</span>
-                                                <a href="#" class="remove">
-                                                    <i class='bx bx-trash'></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <a href="#">
-                                                    <img src="assets/img/top-products/top-products-3.jpg" alt="item">
-                                                </a>
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="shop-details.html">Seasoned Tomatoes</a>
-                                            </td>
-                                            <td class="product-price">
-                                                <span class="unit-amount">$140.50</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                <div class="input-counter">
-                                                    <span class="minus-btn">
-                                                        <i class='bx bx-minus'></i>
-                                                    </span>
-                                                    <input type="text" value="1">
-                                                    <span class="plus-btn">
-                                                        <i class='bx bx-plus'></i>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="subtotal-amount">$140.50</span>
-                                                <a href="#" class="remove">
-                                                    <i class='bx bx-trash'></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail">
-                                                <a href="#">
-                                                    <img src="assets/img/top-products/top-products-4.jpg" alt="item">
-                                                </a>
-                                            </td>
-                                            <td class="product-name">
-                                                <a href="shop-details.html">Seasoned Carrot</a>
-                                            </td>
-                                            <td class="product-price">
-                                                <span class="unit-amount">$547.00</span>
-                                            </td>
-                                            <td class="product-quantity">
-                                                <div class="input-counter">
-                                                    <span class="minus-btn">
-                                                        <i class='bx bx-minus'></i>
-                                                    </span>
-                                                    <input type="text" value="1">
-                                                    <span class="plus-btn">
-                                                        <i class='bx bx-plus'></i>
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="subtotal-amount">$547.00</span>
-                                                <a href="#" class="remove">
-                                                    <i class='bx bx-trash'></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -145,32 +65,22 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-7 col-sm-7 col-md-7">
                                         <a href="shop-1.html" class="default-btn">
-                                            Back to Shop
+                                            Добавить товары
                                         </a>
                                     </div>
-                                    <div class="col-lg-5 col-sm-5 col-md-5 text-right">
-                                        <a href="#" class="default-btn">
-                                            Update Cart
-                                        </a>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
                             <div class="cart-totals">
-                                <h3>Cart Totals</h3>
+                                <h3>Сумма заказа</h3>
                                 <ul>
-                                    <li>Subtotal 
-                                        <span>$1683.50</span>
-                                    </li>
-                                    <li>Shipping 
-                                        <span>$30.00</span>
-                                    </li>
-                                    <li>Total 
-                                        <span><b>$1713.50</b></span>
+                                    <li>Итого 
+                                        <span><b>{{$cart->getTotalPrice()}} руб.</b></span>
                                     </li>
                                 </ul>
-                                <a href="#" class="default-btn">
-                                    Proceed to Checkout
+                                <a href="{{route('app.checkout')}}" class="default-btn">
+                                    Оформить заказ
                                 </a>
                             </div>
                         </form>

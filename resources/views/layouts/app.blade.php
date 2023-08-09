@@ -129,7 +129,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{ route('app.about')}}" class="nav-link">
                                         О нас 
                                     </a>
 
@@ -166,7 +166,7 @@
                                 @if($currentUser->cart)
                                 <div class="option-item">
                                     <div class="cart-btn">
-                                        <a href="cart.html">
+                                        <a href="{{ route('cart')}}">
                                             <i class='flaticon-shopping-cart'></i>
                                             <span class="header-cart">{{ $currentUser->cart->getTotalItems() }}</span>
                                         </a>
@@ -176,7 +176,7 @@
                                     @else
                                 <div class="option-item">
                                     <div class="cart-btn">
-                                        <a href="cart.html">
+                                        <a href="{{ route('cart')}}">
                                             <i class='flaticon-shopping-cart'></i>
                                             <span>0</span>
                                         </a>

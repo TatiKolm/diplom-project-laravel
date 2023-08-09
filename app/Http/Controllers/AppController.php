@@ -15,6 +15,10 @@ class AppController extends Controller
             'categories' => Category::all()->sortBy('name')
         ]);
     }
+    public function aboutPage()
+    {
+        return view("about");
+    }
 
     public function categoryProductsPage($categorySlug)
     {

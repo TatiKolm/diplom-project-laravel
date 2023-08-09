@@ -412,6 +412,10 @@ jQuery(
             }
         });
 
+        $(".change-qty").on("change", function () {
+            $(this).closest("form").submit();
+        });
+
         let $btn = $(".add-to-cart");
 
         $btn.on("click", function (e) {

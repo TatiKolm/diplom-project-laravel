@@ -10,16 +10,17 @@ class Cart extends Model
     use HasFactory;
 
     protected $table = 'cart';
-
     protected $fillable = [
         'user_id', 'total'
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->hasOne(User::class);
     }
 
-    public function items() {
+    public function items()
+    {
         return $this->hasMany(CartItem::class);
     }
 
@@ -48,8 +49,4 @@ class Cart extends Model
         return $count;
     }
 
-    public function getTotalPriceHTML()
-    {
-        return number_format($this->getTotalPrice(), 0, ',', ' '). " руб";
-    }
 }

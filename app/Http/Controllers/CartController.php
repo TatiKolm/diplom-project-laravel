@@ -58,9 +58,7 @@ class CartController extends Controller
         $item->update(['quantity' => $request->input('quantity')]);
         $item->setSubTotal();
         $item->cart->setTotalPrice();
-        // $item->cart->update([
-        //     'total' => $item->cart->total + $item->sub_total
-        // ]);
+       
         return back();
     }
 
