@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Авг 10 2023 г., 06:38
+-- Время создания: Авг 10 2023 г., 22:27
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -41,7 +41,8 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id`, `user_id`, `total`, `created_at`, `updated_at`) VALUES
 (1, 3, 3810.00, '2023-08-06 11:35:07', '2023-08-06 14:55:03'),
-(3, 2, 1820.00, '2023-08-08 00:17:53', '2023-08-09 13:22:16');
+(3, 2, 2800.00, '2023-08-08 00:17:53', '2023-08-10 15:01:50'),
+(4, 6, 1080.00, '2023-08-10 15:28:56', '2023-08-10 15:29:05');
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,11 @@ INSERT INTO `cart_items` (`id`, `cart_id`, `product_id`, `price`, `quantity`, `s
 (1, 1, 13, 590.00, 4, 2360.00, '2023-08-06 11:35:07', '2023-08-06 14:55:02'),
 (2, 1, 16, 290.00, 5, 1450.00, '2023-08-06 14:13:52', '2023-08-06 14:54:39'),
 (6, 3, 12, 490.00, 3, 1470.00, '2023-08-08 00:17:53', '2023-08-08 00:17:55'),
-(8, 3, 15, 350.00, 1, 350.00, '2023-08-09 13:22:16', '2023-08-09 13:22:16');
+(8, 3, 15, 350.00, 1, 350.00, '2023-08-09 13:22:16', '2023-08-09 13:22:16'),
+(9, 3, 14, 390.00, 1, 390.00, '2023-08-10 00:53:09', '2023-08-10 00:53:09'),
+(10, 3, 11, 590.00, 1, 590.00, '2023-08-10 15:01:48', '2023-08-10 15:01:48'),
+(11, 4, 11, 590.00, 1, 590.00, '2023-08-10 15:28:56', '2023-08-10 15:28:56'),
+(12, 4, 12, 490.00, 1, 490.00, '2023-08-10 15:29:05', '2023-08-10 15:29:05');
 
 -- --------------------------------------------------------
 
@@ -172,7 +177,8 @@ CREATE TABLE `model_has_roles` (
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (2, 'App\\Models\\User', 2),
 (1, 'App\\Models\\User', 3),
-(3, 'App\\Models\\User', 5);
+(3, 'App\\Models\\User', 5),
+(3, 'App\\Models\\User', 6);
 
 -- --------------------------------------------------------
 
@@ -194,7 +200,8 @@ CREATE TABLE `orders` (
   `pay` enum('card','cash') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'cash',
   `total_sum` double(8,2) NOT NULL DEFAULT '0.00',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -369,8 +376,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `is_admin`, `created_at`, `updated_at`) VALUES
 (2, 'moderator', 'test@mail.ru', NULL, '$2y$10$m3ul5u/uL32T.ihR51iI4.WngGc5.rPDhUDDnoUEmXA0wkjzSz4Jq', NULL, 0, '2023-08-04 11:49:48', '2023-08-04 11:49:48'),
 (3, 'admin', 'tatka_kol@mail.ru', NULL, '$2y$10$8WmrwV9yJjrhxV9v9LdEXeYZv.qne9RTmktOZtIUkUEkWFcOA7MB2', NULL, 1, '2023-08-05 05:36:52', '2023-08-05 05:36:52'),
-(4, 'user', 'user@mail.ru', NULL, '$2y$10$E/mHVQlj2d.JmYW2LzBlmOylW0XbRGCsEipweUyYGCwbneXN8vqNa', NULL, 0, '2023-08-06 03:16:35', '2023-08-06 03:16:35'),
-(5, 'Татьяна', 'tatka@mail.ru', NULL, '$2y$10$aMgnCkuUeFWyoqqv5.ZD1uM7r3a89MZKYT8epYCctu9bmn9UJvXTa', NULL, 0, '2023-08-06 03:32:11', '2023-08-06 03:32:11');
+(5, 'Татьяна', 'tatka@mail.ru', NULL, '$2y$10$aMgnCkuUeFWyoqqv5.ZD1uM7r3a89MZKYT8epYCctu9bmn9UJvXTa', NULL, 0, '2023-08-06 03:32:11', '2023-08-06 03:32:11'),
+(6, 'user', 'user@mail.ru', NULL, '$2y$10$tsGIZNcAMuKlJpXc0YmO2eCFmbc.jRDhN1W92SKC/N0ykNo/6wBs.', NULL, 0, '2023-08-10 15:28:26', '2023-08-10 15:28:26');
 
 --
 -- Индексы сохранённых таблиц
@@ -498,13 +505,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT для таблицы `categories`
@@ -564,7 +571,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
