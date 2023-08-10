@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
@@ -11,7 +12,10 @@ class OrderController extends Controller
 {
     public function checkoutPage()
     {
-        return view('checkout');
+        
+        return view('checkout',[
+            'cart' => auth()->user()->cart,
+        ]);
         
     }
 
@@ -24,11 +28,12 @@ class OrderController extends Controller
             'user_house' => 'required',
             'phone' => 'required',
             'email' => 'required',
-            'pay' => 'required'
         ]);
 
-        $cart = auth()->user()->cart;
+        dd($request->all());
 
+        $cart = auth()->user()->cart;
+        
         try{
             
             $order = Order::add($request->all());
@@ -55,14 +60,14 @@ class OrderController extends Controller
 
     public function thankyouPage(Order $order)
     {
-        return view('order-thankyou', [
+        return view('order-success', [
             'order' => $order,
         ]);
     }
 
     public function orders()
     {
-        return view('orders.index', [
+        return view('admin-dashboard.orders.orders-list', [
             'orders' => Order::all()->sortByDesc('created_at')
         ]);
     }

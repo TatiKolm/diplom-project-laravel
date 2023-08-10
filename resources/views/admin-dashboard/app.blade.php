@@ -52,7 +52,7 @@
                             @endhasrole
                             @hasanyrole('moderator|admin')
                             <div class="sidenav-menu-heading">Управление заказами</div>
-                            <a class="nav-link" href="">Заказы</a>
+                            <a class="nav-link" href="{{ route('admin.orders')}}">Заказы</a>
                             @endhasanyrole
                         </div>
                     </div>

@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function(){
     
     Route::prefix('admin-dashboard')->middleware('role:admin|moderator')->group(function () {
         Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.main');
+        Route::get('orders', [OrderController::class, 'orders'])->name('admin.orders');
     });
 
     Route::prefix('categories')->middleware('role:admin|moderator')->group(function () {
@@ -65,6 +66,8 @@ Route::middleware(['auth'])->group(function(){
         Route::put('{product}/edit', [ProductController::class, 'update'])->name("products.update");
         Route::delete('{product}', [ProductController::class, 'destroy'])->name("products.destroy");
     });
+
+    
     
     Route::prefix('users')->middleware('role:admin')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name("users.index");

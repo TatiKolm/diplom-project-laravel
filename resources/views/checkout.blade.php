@@ -66,22 +66,10 @@
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             <label>Телефон<span class="required">*</span></label>
-                                            <input type="text"  name="phone" class="form-control" value="{{ old('user_phone')}}" id="phone">
+                                            <input type="text"  name="phone" class="form-control" value="{{ old('phone')}}" id="phone">
                                             @error('phone')
                                             <small class="text-danger">{{ $message }}</small>
                                             @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="create-an-account">
-                                            <label class="form-check-label" for="create-an-account">Создать аккаунт?</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="ship-different-address">
-                                            <label class="form-check-label" for="ship-different-address">Доставка по другому адресу?</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
@@ -106,19 +94,21 @@
                                         </thead>
                                         <tbody>
                                         
+                                        @foreach($cart->items as $item)
                                             <tr>
                                                 <td class="product-name">
-                                                    <a href="shop-details.html"></a>
+                                                    <a href="shop-details.html">{{$item->product->title}}</a>
                                                 </td>
                                                 <td class="product-total">
-                                                    <span class="subtotal-amount"></span>
+                                                    <span class="subtotal-amount">{{$item->sub_total}} руб.</span>
                                                 </td>
                                             </tr>
+                                            @endforeach
                                                 <td class="total-price">
                                                     <span>Итог</span>
                                                 </td>
                                                 <td class="product-subtotal">
-                                                    <span class="subtotal-amount">$1713.50</span>
+                                                    <span class="subtotal-amount">{{$cart->getTotalPrice()}} руб.</span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -130,16 +120,16 @@
                                         <p>Выберите способ оплаты</p>
                                             
                                         <p>
-                                            <input type="radio" id="paypal" name="radio-group">
+                                            <input type="radio" id="paypal" name="pay" value="card">
                                             <label for="paypal">Картой</label>
                                         </p>
                                         <p>
-                                            <input type="radio" id="cash-on-delivery" name="radio-group">
+                                            <input type="radio" id="cash-on-delivery" name="pay" value="cash">
                                             <label for="cash-on-delivery">Наличными при получении</label>
                                         </p>
                                     </div>
                                     <button class="default-btn">
-                                        Оформить
+                                        Оформить заказ
                                     </button>
                                 </div>
                             </div>
@@ -150,4 +140,3 @@
         </section>
 		<!-- End Checkout Area -->
 @endsection
-
