@@ -429,5 +429,10 @@ jQuery(
                 },
             });
         });
+
+        let $phone = $("#phone");
+        if ($phone.lenght > 0) {
+            $("#phone").inputmask({ mask: "+7 (999) 999-99-99" });
+        }
     })(jQuery)
 );

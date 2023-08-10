@@ -14,7 +14,8 @@
                         </div>
                     </div>
                 </div>
-                <form>
+                <form action="{{ route('app.store-order') }}" method="POST">
+                @csrf
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <div class="billing-details">
@@ -23,37 +24,52 @@
                                     <div class="col-lg-12 col-md-12">
                                         <div class="form-group">
                                             <label>Ваше имя<span class="required">*</span></label>
-                                            <input type="text" name="user_name" class="form-control">
+                                            <input type="text" name="user_name" class="form-control" value="{{ old('user_name')}}">
+                                            @error('user_name')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-6">
                                         <div class="form-group">
                                             <label>Улица <span class="required">*</span></label>
-                                            <input type="text" name="user_street" class="form-control">
+                                            <input type="text" name="user_street" class="form-control" value="{{ old('user_street')}}">
+                                            @error('user_street')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             <label>№ дома<span class="required">*</span></label>
-                                            <input type="text" name="user_house" class="form-control">
+                                            <input type="text" name="user_house" class="form-control" value="{{ old('user_house')}}">
+                                            @error('user_house')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             <label>№ квартиры <span class="required">*</span></label>
-                                            <input type="text" name="user_apartment" class="form-control">
+                                            <input type="text" name="user_apartment" class="form-control" value="{{ old('user_apartment')}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             <label>Email<span class="required">*</span></label>
-                                            <input type="email" name="email" class="form-control">
+                                            <input type="email" name="email" class="form-control" value="{{ old('email')}}">
+                                            @error('email')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
                                             <label>Телефон<span class="required">*</span></label>
-                                            <input type="text"  name="phone"class="form-control">
+                                            <input type="text"  name="phone" class="form-control" value="{{ old('user_phone')}}" id="phone">
+                                            @error('phone')
+                                            <small class="text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12">
@@ -89,15 +105,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        
                                             <tr>
                                                 <td class="product-name">
-                                                    <a href="shop-details.html">Darling Oranges</a>
+                                                    <a href="shop-details.html"></a>
                                                 </td>
                                                 <td class="product-total">
-                                                    <span class="subtotal-amount">$455.00</span>
+                                                    <span class="subtotal-amount"></span>
                                                 </td>
                                             </tr>
-                                            
                                                 <td class="total-price">
                                                     <span>Итог</span>
                                                 </td>
@@ -122,9 +138,9 @@
                                             <label for="cash-on-delivery">Наличными при получении</label>
                                         </p>
                                     </div>
-                                    <a href="#" class="default-btn">
+                                    <button class="default-btn">
                                         Оформить
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -134,3 +150,4 @@
         </section>
 		<!-- End Checkout Area -->
 @endsection
+

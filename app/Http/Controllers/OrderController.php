@@ -12,6 +12,7 @@ class OrderController extends Controller
     public function checkoutPage()
     {
         return view('checkout');
+        
     }
 
     public function storeOrder(Request $request)

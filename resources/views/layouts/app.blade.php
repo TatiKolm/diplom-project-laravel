@@ -449,6 +449,9 @@
         <!-- Wow JS -->
         <script src="{{ asset('assets/js/wow.min.js') }}"></script>
         <!-- Custom JS -->
+        <script src="{{asset('assets/js/jquery.inputmask.min.js')}}"></script>
+
         <script src="{{ asset('assets/js/main.js') }}"></script>
+        
     </body>
 </html>
