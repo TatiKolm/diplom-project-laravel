@@ -5,14 +5,6 @@
 		<section class="checkout-area ptb-100">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 col-md-12">
-                        <div class="user-actions">
-                            <i class='bx bx-link-external'></i>
-                            <span>Новый покупатель? 
-                                <a href="{{ route('auth.register')}}">Нажмите для регистрации</a>
-                            </span>
-                        </div>
-                    </div>
                 </div>
                 <form action="{{ route('app.store-order') }}" method="POST">
                 @csrf
@@ -50,7 +42,7 @@
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="form-group">
-                                            <label>№ квартиры <span class="required">*</span></label>
+                                            <label>№ квартиры <span class="required"></span></label>
                                             <input type="text" name="user_apartment" class="form-control" value="{{ old('user_apartment')}}">
                                         </div>
                                     </div>

@@ -26,7 +26,8 @@ class CategoryController extends Controller
             'name' => 'required'
         ]);
         
-        Category::create($request->all());
+        $category = Category::create($request->all());
+        $category->uploadImage($request->file('image'));
 
         return redirect()->route("categories.list");
     }

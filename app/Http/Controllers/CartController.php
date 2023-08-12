@@ -9,16 +9,26 @@ use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addToCart(Product $product)
+    public function addToCart(Request $request, Product $product)
     {
         $currentUser = auth()->user();
+        $currentSession = session()->getId();
         $args=[];
 
         if($currentUser){
             $args['user_id'] = $currentUser->id;
+            $args['session_id'] = $currentSession;
+        } else {
+            $args['session_id'] = $currentSession;
         }
-
-        $cart = $currentUser->cart;
+        
+        if(!$currentUser){
+            $cart = Cart::where('session_id', session()->getId())->first();
+        } else {
+            $cart = $currentUser->cart;
+        }
+        
+        
         if(! $cart){
             $cart = Cart::create($args); 
         }
@@ -34,7 +44,7 @@ class CartController extends Controller
             ]);
         } else {
             $cartItem-> update([
-                'quantity' => $cartItem -> quantity +1
+                'quantity' => $cartItem -> quantity + $_GET['qty']
             ]);
             $cartItem->setSubTotal();
         }
@@ -48,8 +58,14 @@ class CartController extends Controller
 
     public function cartPage()
     {
+        $currentUser = auth()->user();
+        if(!$currentUser){
+            $cart = Cart::where('session_id', session()->getId())->first();
+        } else {
+            $cart = $currentUser->cart;
+        }
         return view('cart', [
-            'cart' => auth()->user()->cart
+            'cart' => $cart
         ]);
     }
 

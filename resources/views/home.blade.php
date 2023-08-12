@@ -16,7 +16,6 @@
                                             <p>Не теряйте время на готовку и очереди, наслаждайтесь разнообразием вкусов с нашей удобной доставкой еды. Закажите прямо сейчас и позвольте нам позаботиться о вашем полноценном питании!"</p>
                                             <div class="slider-btn">
                                                 <a href="shop-1.html" class="default-btn">Меню</a>
-                                                <a href="cart.html" class="optional-btn">В корзину</a>
                                             </div>
                                         </div>
                                     </div>
@@ -48,7 +47,6 @@
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis ipsum suspendisse</p>
                                             <div class="slider-btn">
                                                 <a href="shop-1.html" class="default-btn">Our Shop</a>
-                                                <a href="cart.html" class="optional-btn">Add to Cart</a>
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +83,7 @@
         <section class="special-features-area pt-100 pb-70">
             <div class="container">
                 <div class="section-title">
-                    <h2>Special Features</h2>
+                    <h2>Наши преимущества</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis ipsum suspendisse</p>
                 </div>
 
@@ -97,9 +95,8 @@
                             </div>
 
                             <div class="content">
-                                <h3>Fresh Organic Food Provides</h3>
+                                <h3>Всегда свежие продукты</h3>
                                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt</p>
-                                <a href="#" class="read-btn">Read More +</a>
                             </div>
                         </div>
                     </div>
@@ -111,9 +108,8 @@
                             </div>
 
                             <div class="content">
-                                <h3>Fast & Easy Food Delivery</h3>
+                                <h3>Быстрая доставка</h3>
                                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt</p>
-                                <a href="#" class="read-btn">Read More +</a>
                             </div>
                         </div>
                     </div>
@@ -125,9 +121,8 @@
                             </div>
 
                             <div class="content">
-                                <h3>Very Easy Payment System</h3>
+                                <h3>Простая оплата</h3>
                                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt</p>
-                                <a href="#" class="read-btn">Read More +</a>
                             </div>
                         </div>
                     </div>

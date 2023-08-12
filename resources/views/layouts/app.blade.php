@@ -162,7 +162,16 @@
                             </ul>
 
                             <div class="others-options d-flex align-items-center">
-                            @if($currentUser)
+                            @if(!$currentUser)
+                            <div class="option-item">
+                                    <div class="cart-btn">
+                                        <a href="{{ route('cart')}}">
+                                            <i class='flaticon-shopping-cart'></i>
+                                            <span>0</span>
+                                        </a>
+                                    </div>
+                                </div> 
+                                @else
                                 @if($currentUser->cart)
                                 <div class="option-item">
                                     <div class="cart-btn">
@@ -171,8 +180,7 @@
                                             <span class="header-cart">{{ $currentUser->cart->getTotalItems() }}</span>
                                         </a>
                                     </div>
-                                </div>
-                                @endif
+                                </div>                              
                                     @else
                                 <div class="option-item">
                                     <div class="cart-btn">
@@ -182,6 +190,7 @@
                                         </a>
                                     </div>
                                 </div>
+                                @endif
                                 @endif
 
                                 <div class="option-item">

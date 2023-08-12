@@ -3,6 +3,7 @@
 <!-- Start Cart Area -->
 <section class="cart-area ptb-100">
             <div class="container">
+            @if($cart)
                 <div class="row">
                     <div class="col-lg-12 col-md-12">
                         <form>
@@ -18,6 +19,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    
                                     @foreach($cart->items as $item)
                                         <tr>
                                             <td class="product-thumbnail">
@@ -26,10 +28,10 @@
                                                 </a>
                                             </td>
                                             <td class="product-name">
-                                                <a href="shop-details.html">{{$item->product->title}}</a>
+                                                <a href="{{ route('app.product-page', $item->product->slug)}}">{{$item->product->title}}</a>
                                             </td>
                                             <td class="product-price">
-                                                <span class="unit-amount">{{$item->price}} .руб</span>
+                                                <span class="unit-amount">{{$item->price}} руб.</span>
                                             </td>
                                             <td class="product-quantity">
                                                 <div class="input-counter">
@@ -46,7 +48,7 @@
                                                 </div>
                                             </td>
                                             <td class="product-subtotal">
-                                                <span class="subtotal-amount">{{$item->sub_total}} .руб</span>
+                                                <span class="subtotal-amount">{{$item->sub_total}} руб.</span>
                                                 
                                                 <td>
                                                     <form action="{{ route('cart.item.destroy', $item)}}" method="POST">
@@ -86,6 +88,12 @@
                         </form>
                     </div>
                 </div>
+                @else
+    <div>
+        <p>Ваша корзина пуста</p>
+        <a href="/" class="btn default-btn">Вернуться на главную</a>
+    </div>
+    @endif
             </div>
         </section>
 		<!-- End Cart Area -->

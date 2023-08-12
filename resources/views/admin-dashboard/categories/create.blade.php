@@ -21,6 +21,13 @@
                                     <label for="name" class="form-label">Название категории</label>
                                     <input type="text" id="name" name="name" class="form-control">
                                 </div>
+                                <div class="form-group mb-3">
+                                <label for="image" class="form-label">Изображение</label>
+                                <input type="file" id="image" name="image" class="form-control">
+                                @error('image')
+                                    <small class="text-denger">{{ $message }}</small>
+                                @enderror
+                            </div>
                                 <button type="submit" class="btn btn-primary">Создать</button>
                             </form>
                             </div>

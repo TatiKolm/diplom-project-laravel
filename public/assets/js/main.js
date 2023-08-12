@@ -417,12 +417,15 @@ jQuery(
         });
 
         let $btn = $(".add-to-cart");
-
+        let $inputQty = $("#items_qty");
         $btn.on("click", function (e) {
             e.preventDefault();
             $.ajax({
                 url: $(this).attr("href"),
                 method: "GET",
+                data: {
+                    qty: $inputQty.length != 0 ? $inputQty.val() : 1,
+                },
                 success: function (res) {
                     let $headerCart = $(".header-cart");
                     $headerCart.html(res["qty"]);

@@ -21,7 +21,7 @@
                         <div class="card mb-4">
                             <div class="card-header">Список товаров</div>
                             <div class="card-body">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="datatablesSimple">
                                     <thead>
                                         <tr>
                                             <th>Изображение</th>

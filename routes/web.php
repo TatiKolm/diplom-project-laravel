@@ -30,20 +30,17 @@ Route::get('about', [AppController::class, 'aboutPage'])->name("app.about");
 Route::get('catalog/categories/{categorySlug}', [AppController::class, "categoryProductsPage"])->name("app.catalog-by-category");
 Route::get('product/{productSlug}', [AppController::class, "productPage"])->name("app.product-page");
 
+Route::get('add-to-cart/{product}', [CartController::class, 'addToCart'])->name('cart.add-product');
+Route::get('cart', [CartController::class, 'cartPage'])->name('cart');
+Route::put('cart/items/{item}/edit', [CartController::class, 'changeQty'])->name('cart.item.qty-update');
+Route::delete('cart/items/{item}', [CartController::class, 'destroy'])->name('cart.item.destroy');
 
+Route::get('checkout', [OrderController::class, 'checkoutPage'])->name('app.checkout');
+Route::post('checkout', [OrderController::class, 'storeOrder'])->name('app.store-order');
+Route::get('order/{order}/thankyou', [OrderController::class, 'thankyouPage'])->name('app.order-thankyou');
 
 Route::middleware(['auth'])->group(function(){
 
-    Route::get('add-to-cart/{product}', [CartController::class, 'addToCart'])->name('cart.add-product');
-    Route::get('cart', [CartController::class, 'cartPage'])->name('cart');
-    Route::put('cart/items/{item}/edit', [CartController::class, 'changeQty'])->name('cart.item.qty-update');
-    Route::delete('cart/items/{item}', [CartController::class, 'destroy'])->name('cart.item.destroy');
-
-    Route::get('checkout', [OrderController::class, 'checkoutPage'])->name('app.checkout');
-    Route::post('checkout', [OrderController::class, 'storeOrder'])->name('app.store-order');
-    Route::get('order/{order}/thankyou', [OrderController::class, 'thankyouPage'])->name('app.order-thankyou');
-
-    
     Route::prefix('admin-dashboard')->middleware('role:admin|moderator')->group(function () {
         Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.main');
         Route::get('orders', [OrderController::class, 'orders'])->name('admin.orders');

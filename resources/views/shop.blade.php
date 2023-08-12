@@ -78,7 +78,7 @@
                                         <span class="minus-btn">
                                             <i class='bx bx-minus'></i>
                                         </span>
-                                        <input type="text" value="1">
+                                        <input type="text" value="1" id="items_qty">
                                         <span class="plus-btn">
                                             <i class='bx bx-plus'></i>
                                         </span>

@@ -12,9 +12,14 @@ class OrderController extends Controller
 {
     public function checkoutPage()
     {
-        
+        $currentUser = auth()->user();
+        if(!$currentUser){
+            $cart = Cart::where('session_id', session()->getId())->first();
+        } else {
+            $cart = $currentUser->cart;
+        }
         return view('checkout',[
-            'cart' => auth()->user()->cart,
+            'cart' => $cart,
         ]);
         
     }
@@ -32,7 +37,7 @@ class OrderController extends Controller
 
         dd($request->all());
 
-        $cart = auth()->user()->cart;
+        $cart = Cart::where('session_id', session()->getId())->first();
         
         try{
             

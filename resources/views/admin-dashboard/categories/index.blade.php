@@ -24,6 +24,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
+                                            <th>Изображение</th>
                                             <th>Название</th>
                                             <th>Действия</th>
                                         </tr>
@@ -32,6 +33,9 @@
                                     <tbody>
                                     @foreach ($categories as $category)
                                         <tr>
+                                            <td>
+                                                <img src="{{ $category->getImageCategory() }}" alt="" style="height:100px">
+                                            </td>
                                             <td>{{ $category->name }}</td>
                                             <td class="d-flex">
                                                 <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-sm btn-warning">
