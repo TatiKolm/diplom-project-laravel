@@ -30,18 +30,6 @@
                             @enderror
                         </div>
 
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="checkme">
-                                    <label class="form-check-label" for="checkme">Запомнить меня</label>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6 col-md-6 col-sm-6 lost-your-password">
-                                <a href="#" class="lost-your-password">Забыли пароль?</a>
-                            </div>
-                        </div>
 
                         <button type="submit" class="default-btn">Войти</button>
                     </form>

@@ -38,7 +38,7 @@
                                             <td>{{ $order->user_name }}</td>
                                             
                                             <td>{{ $order->getCustomerAdress() }}</td>
-                                            <td >{{ $order->phone }}</td>
+                                            <td ><p class="phone">{{ $order->phone }}</p></td>
                                             <td><a href="">Заказ</a></td>
                                             <td>{{ $order->order_notes }}</td>
                                             <td>

@@ -81,5 +81,9 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{{ asset('assets/admin/js/scripts.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/jquery.min.js') }}"></script>
+        <script src="{{asset('assets/js/jquery.inputmask.min.js')}}"></script>
+        <script src="{{ asset('assets/admin/js/script2.js') }}"></script>
+        
     </body>
 </html>

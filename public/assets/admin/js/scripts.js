@@ -94,15 +94,5 @@ window.addEventListener("DOMContentLoaded", (event) => {
         targetAnchor.classList.add("active");
     });
 
-    $(".change-status").on("change", function () {
-        let select = $(this);
-        alert("test: " + $(this).val());
-        $.ajax({
-            url:
-                select.closest("form").attr("action") +
-                "?status=" +
-                select.val(),
-            method: "GET",
-        });
-    });
+    
 });
