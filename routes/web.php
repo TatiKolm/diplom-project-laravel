@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
@@ -43,7 +44,9 @@ Route::middleware(['auth'])->group(function(){
 
     Route::prefix('admin-dashboard')->middleware('role:admin|moderator')->group(function () {
         Route::get('admin', [AdminController::class, 'adminPage'])->name('admin.main');
-        Route::get('orders', [OrderController::class, 'orders'])->name('admin.orders');
+        Route::get('orders', [AdminOrderController::class, 'index'])->name('admin.orders');
+        Route::get("change-order-status/{order}", [AdminOrderController::class, "changeStatus"])->name('order.change-status');
+        
     });
 
     Route::prefix('categories')->middleware('role:admin|moderator')->group(function () {

@@ -412,6 +412,18 @@ jQuery(
             }
         });
 
+        $(".change-status").on("change", function () {
+            let select = $(this);
+            alert("test: " + $(this).val());
+            $.ajax({
+                url:
+                    select.closest("form").attr("action") +
+                    "?status=" +
+                    select.val(),
+                method: "GET",
+            });
+        });
+
         $(".change-qty").on("change", function () {
             $(this).closest("form").submit();
         });

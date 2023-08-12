@@ -44,6 +44,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($categoryId);
         $category->update($request->all()); 
+        $category->uploadImage($request->file("image"));
 
         return redirect()->route("categories.list");
     }

@@ -152,13 +152,6 @@
 
                                     </ul>
                                 </li>
-
-
-                                <li class="nav-item">
-                                    <a href="contact.html" class="nav-link">
-                                        Контакты
-                                    </a>
-                                </li>
                             </ul>
 
                             <div class="others-options d-flex align-items-center">

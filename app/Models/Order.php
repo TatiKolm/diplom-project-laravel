@@ -13,6 +13,7 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'status',
+        'user_name',
         'user_street',
         'user_house',
         'user_apartment',
@@ -32,7 +33,6 @@ class Order extends Model
     {
         $order = new static;
         $order->fill($input);
-        $order->user_id = auth()->user()->id;
         $order->phone = $input['phone'] != null ? str_replace(['(', ')', '-', ' ', '+'], '', $input['phone']) : null;
         $order->save();
 
@@ -47,6 +47,6 @@ class Order extends Model
         $data[] = $this->user_house ?? $this->user_house;
         $data[] = $this->user_apartment ?? $this->user_apartment;
 
-        return implode(' ', $data);
+        return implode(', ', $data);
     }
 }

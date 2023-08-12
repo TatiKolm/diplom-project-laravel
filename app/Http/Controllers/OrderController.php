@@ -28,16 +28,18 @@ class OrderController extends Controller
     {
         $request->validate([
             'user_name' => 'required',
-            'user_surname' => 'required',
             'user_street' => 'required',
-            'user_house' => 'required',
+            'user_house' => 'required', 
             'phone' => 'required',
             'email' => 'required',
         ]);
 
-        dd($request->all());
-
-        $cart = Cart::where('session_id', session()->getId())->first();
+        $currentUser = auth()->user();
+        if(!$currentUser){
+            $cart = Cart::where('session_id', session()->getId())->first();
+        } else {
+            $cart = $currentUser->cart;
+        }
         
         try{
             
@@ -70,11 +72,6 @@ class OrderController extends Controller
         ]);
     }
 
-    public function orders()
-    {
-        return view('admin-dashboard.orders.orders-list', [
-            'orders' => Order::all()->sortByDesc('created_at')
-        ]);
-    }
+  
     
 }
